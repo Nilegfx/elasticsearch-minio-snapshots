@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  elasticsearch:
+    build: .
+    network_mode: host
+  cerebro:
+    image: lmenezes/cerebro
+    environment:
+      - "http.port=9001"
+    ports:
+      - "9001:9001"
+    network_mode: host
+  minio:
+    image: minio/minio
+    command: server /data 
+    volumes:
+      - ./minio/data:/data
+    ports:
+      - "9000:9000"
+    network_mode: host
+
+      
